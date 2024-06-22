@@ -17,18 +17,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping("/api/v1/venda")
+@RequestMapping("/api/v1/venda/")
 
 public class VendaController {
     @Autowired
     private VendaService VendaService;
     
+    //Rota para fazer uma venda
     @PostMapping
     public Venda DoVenda(@RequestParam Long id_cliente, @RequestParam List<Long> id_patos) {
         return VendaService.DoVenda(id_cliente, id_patos);
 
     }
 
+    //Rota para pegar todas as vendas
     @GetMapping
     public List<Venda> getVendas() {
         return VendaService.getVendas();
