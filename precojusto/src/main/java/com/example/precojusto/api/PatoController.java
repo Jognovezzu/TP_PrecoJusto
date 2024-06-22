@@ -3,17 +3,23 @@ package com.example.precojusto.api;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.precojusto.api.model.CreatePatoRequest;
-import com.example.precojusto.repository.model.Pato;
+import com.example.precojusto.repository.PatoDTO;
 import com.example.precojusto.service.PatoService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
-@RequestMapping("/api/v1/pato")
+@RequestMapping("/api/v1/pato/")
 public class PatoController {
     private final PatoService patoService;
 
@@ -22,9 +28,21 @@ public class PatoController {
     }
 
     @PostMapping
-    public Pato postMethodName(@RequestBody CreatePatoRequest pato) {
-        
+    public String create(@RequestBody CreatePatoRequest pato) {
         return patoService.createPato(pato);
     }
+
+    @GetMapping("/{id}")
+    public PatoDTO getPatoById(@PathVariable Long id) {
+        return patoService.getPatoById(id);
+    }
+    
+
+    @GetMapping
+    public ResponseEntity<List<PatoDTO>> getAll(){
+        List <PatoDTO> patos = patoService.getAll();
+        return ResponseEntity.ok(patos);
+    }
+    
     
 }

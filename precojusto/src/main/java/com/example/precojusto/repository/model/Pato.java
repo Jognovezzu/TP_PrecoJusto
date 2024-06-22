@@ -2,10 +2,16 @@ package com.example.precojusto.repository.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "PATO")
@@ -14,19 +20,22 @@ public class Pato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name= "nome", nullable = false, length = 100)
+    @Column(name= "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column (name = "mae", nullable = false, length = 100)
-    private String mae;
+    @ManyToOne
+    private Pato mae;
 
-    @Column (name = "nfilhos", nullable = false, length = 100, columnDefinition = "int default 0")
+    @OneToMany(mappedBy = "mae", cascade = CascadeType.ALL)
+    private List<Pato> filhos;
+
+    @Column(name = "nfilhos", nullable = false, columnDefinition = "int default 0")
     private int nfilhos;
 
-    @Column (name = "disponivel", nullable = false, length = 100, columnDefinition = "boolean default true")
+    @Column(name = "disponivel", nullable = false, columnDefinition = "boolean default true")
     private boolean disponivel;
 
-
+    public Pato() {}
 
     public Long getId() {
         return id;
@@ -40,21 +49,47 @@ public class Pato {
         this.nome = nome;
     }
 
-    public String getMae() {
+    public Pato getMae() {
         return mae;
+    }
+
+    public void setMae(Pato mae) {
+        this.mae = mae;
     }
 
     public int getNfilhos() {
         return nfilhos;
     }
 
-    public Pato (String nome, String mae) {
-        this.nome = nome;
-        this.mae = mae;
+    public void setNfilhos(int nfilhos) {
+        this.nfilhos = nfilhos;
     }
 
+    public boolean isDisponivel() {
+        return disponivel;
+    }
 
-    
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
 
-    
+    public List<Pato> getFilhos() {
+        return filhos;
+    }
+
+    public void setFilhos(List<Pato> filhos) {
+        this.filhos = filhos;
+    }
+
+    public void updateFilhos() {
+        this.nfilhos++;
+    }
+
+    public Pato(String nome, Pato mae) {
+        this.nome = nome;
+        this.mae = mae;
+        this.nfilhos = 0;
+        this.disponivel = true;
+    }
 }
+

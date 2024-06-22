@@ -12,8 +12,10 @@ CREATE TABLE PATO (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     mae VARCHAR(255),
+    id_mae BIGINT,
     nfilhos INT DEFAULT 0,
-    disponivel BOOLEAN
+    disponivel BOOLEAN,
+    CONSTRAINT fk_mae FOREIGN KEY (id_mae) REFERENCES pato(id)
 );
 
 -- Tabela Venda

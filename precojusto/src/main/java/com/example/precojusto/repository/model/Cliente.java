@@ -34,6 +34,9 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public Cliente() {
+    }
+
     public Cliente(String nome, boolean desconto) {
         this.nome = nome;
         this.desconto = desconto;
