@@ -50,9 +50,15 @@ docker-compose -f docker-compose up
 ### 5. DIAGRAMAS 
 - Segue abaixo os diagramas e o cronograma do projeto em um arquivo PDF.
 [Diagramas](Cronograma e Diagramas.pdf)
-###  5. OBSERVAÇÕES:
+###  6. OBSERVAÇÕES:
 
 - Apos a compilacao do projeto, foi verificado um erro na geracao do relatorio em PDF (Chegou a funcionar), o qual nao foi possivel corrigir a tempo. Mas deixo a seguir um print do relatorio gerado e o arquivo que fora gerado.
 
-![Relatorio em PDF](Captura de tela 2024-06-23 142447.png)	
+[Print PDF](Captura1.png)
+
+
+
 [Relatorio em PDF](report.pdf)
+
+- Print do documento Excel gerado (it's working)
+[Print Excel](Captura2.png)
