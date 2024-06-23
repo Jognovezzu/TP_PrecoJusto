@@ -35,6 +35,14 @@ cd docker
 docker-compose -f docker-compose up
 ```
 
+### 3.3.1. SEM O BUILD EM .JAR:
+```bash
+cd TP_PrecoJusto
+./mvnw clean package -DskipTests
+```
+- Na pasta `\precojusto\target` haverá um arquivo `.jar` que deve ser copiado para a pasta `\docker` do projeto.
+- Em seguida, executar o comando `docker-compose -f docker-compose up` na pasta `docker`.
+
 ### 4. DOCUMENTAÇÃO DAS ROTAS:
 #### 4.1. Rotas:
 - [GET] http://localhost:8080/api/v1/pato/ : Retorna todos os patos cadastrados
