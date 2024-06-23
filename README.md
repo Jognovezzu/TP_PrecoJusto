@@ -14,3 +14,24 @@ Projeto do Backend para uma API RESTful de um sistema de Gerenciamento de Patos.
   <img src="https://www.svgrepo.com/show/349342/docker.svg" alt="Docker" title="Docker" height="50" />
 
 </div>
+
+## 3. EXECUTAR PROJETO LOCALMENTE:
+### 3.1. PRÉ-REQUISITOS:
+- Java 11
+- Maven
+- Docker
+- Docker Compose
+
+### 3.2. CLONAR REPOSITÓRIO:
+```bash
+git clone https://github.com/Jognovezzu/TP_PrecoJusto.git
+```
+
+### 3.3. EXECUTAR PROJETO:
+```bash
+cd TP_PrecoJusto
+cd docker
+docker-compose up
+```
+
+### 3.4. DOCUMENTAÇÃO DA API:

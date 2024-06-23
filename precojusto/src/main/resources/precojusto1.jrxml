@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 5.1.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="novo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT p.nome AS pato_nome,
+    p.disponivel AS pato_disponivel,
+    p.valor AS pato_valor,
+    c.nome AS cliente_nome,
+    c.desconto AS cliente_desconto
+FROM 
+    precojusto.PATO p
+LEFT JOIN 
+    precojusto.VENDA_PATOS vp ON p.id = vp.id_pato
+LEFT JOIN 
+    precojusto.VENDA v ON vp.id_venda = v.id
+LEFT JOIN 
+    precojusto.CLIENTE c ON v.id_cliente = c.id
+ORDER BY 
+    p.nome]]>
+	</queryString>
+	<field name="pato_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="pato_nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="pato_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pato"/>
+	</field>
+	<field name="pato_disponivel" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="pato_disponivel"/>
+		<property name="com.jaspersoft.studio.field.label" value="pato_disponivel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pato"/>
+	</field>
+	<field name="pato_valor" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="pato_valor"/>
+		<property name="com.jaspersoft.studio.field.label" value="pato_valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pato"/>
+	</field>
+	<field name="cliente_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cliente_nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="cliente_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="cliente_desconto" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="cliente_desconto"/>
+		<property name="com.jaspersoft.studio.field.label" value="cliente_desconto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="41" y="18" width="721" height="66" backcolor="#000000" uuid="d8d9e644-3a32-491d-97cb-a277aff17133"/>
+				<staticText>
+					<reportElement style="Title" x="175" y="0" width="370" height="66" uuid="27d8f6ee-f0a9-44f6-a160-1763c3b00f30"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="24" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Gerenciamento de Patos]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="159" height="18" forecolor="#000000" uuid="9a9b262e-63a9-4848-a8af-ecc6b30600a0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0ddd9360-1a5a-4c83-85e1-72256997857c"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[pato_nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="159" y="0" width="159" height="18" forecolor="#000000" uuid="8d94c6e9-09ba-4d96-b4c4-42faf8ec0e23">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e482f419-535c-4ca6-add6-c3db8a1ebbac"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[pato_disponivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="318" y="0" width="159" height="18" forecolor="#000000" uuid="f644227e-22d8-4e28-ba14-06e01371f756">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7bbadd71-c460-4692-9357-6f8449594417"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[pato_valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="477" y="0" width="159" height="18" forecolor="#000000" uuid="6174c06c-47e5-4a3b-adf5-a31562fb7670">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae7cdcd3-b6a7-423f-b596-5885c6268f79"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cliente_nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="636" y="0" width="159" height="18" forecolor="#000000" uuid="b6182f4e-a6a6-41a3-abef-d4cf3dff18f9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a815a02e-1d8e-4475-b816-2df148ab926b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cliente_desconto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="159" height="18" uuid="c0560150-0fd5-4135-9754-ab4d30e62841">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0ddd9360-1a5a-4c83-85e1-72256997857c"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pato_nome}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="159" y="0" width="159" height="18" uuid="34b18cea-8428-4e7b-9bf2-b31b01307ab8">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e482f419-535c-4ca6-add6-c3db8a1ebbac"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pato_disponivel}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="318" y="0" width="159" height="18" uuid="4bac9da9-4ebe-4996-9b08-8415ca2e1b8e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7bbadd71-c460-4692-9357-6f8449594417"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pato_valor}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="477" y="0" width="159" height="18" uuid="55b58c37-e8cb-4903-a434-ccff615416b5">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae7cdcd3-b6a7-423f-b596-5885c6268f79"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cliente_nome} != null ? $F{cliente_nome} : "-"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="636" y="0" width="159" height="18" uuid="e31f30a2-75be-4ea8-a764-f9449c5e503a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a815a02e-1d8e-4475-b816-2df148ab926b"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cliente_desconto}  != null ? $F{cliente_desconto}: "false"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="501ac6c4-e9d4-43cb-ba6b-7f2f44394cf3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
