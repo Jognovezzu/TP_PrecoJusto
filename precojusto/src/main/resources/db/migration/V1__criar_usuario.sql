@@ -37,3 +37,10 @@ CREATE TABLE IF NOT EXISTS precojusto.VENDA_PATOS (
     CONSTRAINT fk_venda_patos_pato FOREIGN KEY (id_pato) REFERENCES precojusto.pato(id)
 );
 
+
+-- Inserção de dados
+INSERT INTO precojusto.cliente (nome, desconto) VALUES ('João', TRUE);
+INSERT INTO precojusto.cliente (nome, desconto) VALUES ('Maria', FALSE);
+
+INSERT INTO precojusto.pato (nome, mae, id_mae, valor, nfilhos, disponivel) VALUES ('Pato 1', NULL, NULL, 70, 0, TRUE);
+INSERT INTO precojusto.pato (nome, mae, id_mae, valor, nfilhos, disponivel) VALUES ('Pato 2', NULL, NULL, 70, 0, TRUE);

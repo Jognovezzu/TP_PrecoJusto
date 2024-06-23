@@ -43,27 +43,18 @@ public class ReportService {
 
 
     public byte[] generateReportPDF() throws JRException {
-    
-        try {
-            InputStream reportStream = new ClassPathResource("PrecoJusto.jrxml").getInputStream();
+        try (InputStream reportStream = new ClassPathResource("PrecoJusto1.jrxml").getInputStream()) {
             JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
-    
-            
-            try {
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), dataSource.getConnection());
-                return JasperExportManager.exportReportToPdf(jasperPrint);
-            } catch (SQLException e) {
-                // Handle the SQLException here
-                e.printStackTrace();
-                return null; // or throw a custom exception
-            }
-    
-        } catch (IOException e) {
-            // Handle the IOException here
-            e.printStackTrace();
-            return null; // or throw a custom exception
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), dataSource.getConnection());
+
+            return JasperExportManager.exportReportToPdf(jasperPrint);
+        } catch (IOException | SQLException e) {
+            System.err.println("Error generating PDF report: " + e.getMessage());
+            throw new JRException("Error generating PDF report", e);
         }
     }
+    
 
     public String generateReportXLSX(OutputStream outputStream){
         List<ReportProjection> patos = vendaService.makeReport();
@@ -101,9 +92,10 @@ public class ReportService {
                 Row row = sheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(pato.getPatoNome() != null ? pato.getPatoNome() : "-");
                 row.createCell(1).setCellValue(pato.getPatoDisponivel() != null ? (pato.getPatoDisponivel() ? "Sim" : "Não") : "-");
-                row.createCell(2).setCellValue(pato.getPatoValor() != null ? pato.getPatoValor() : 0);
-                row.createCell(3).setCellValue(pato.getClienteNome() != null ? pato.getClienteNome() : "-");
-                row.createCell(4).setCellValue(pato.getClienteDesconto() != null ? (pato.getClienteDesconto() ? "Sim" : "Não") : "-");
+                row.createCell(2).setCellValue(pato.getClienteNome() != null ? pato.getClienteNome() : "-");
+                row.createCell(3).setCellValue(pato.getClienteDesconto() != null ? (pato.getClienteDesconto() ? "Sim" : "Não") : "-");
+                row.createCell(4).setCellValue(pato.getPatoValor() != null ? pato.getPatoValor() : 0);
+                
             }
 
 

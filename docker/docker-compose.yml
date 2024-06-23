@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  api:
+    image: "precojusto:latest"
+    build: 
+      context: .
+    container_name: api
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/jogno?currentSchema=precojusto
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres:15.1
+    container_name: db
+    env_file:
+      - .dev.env
+    ports:
+      - "5432:5432"
