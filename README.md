@@ -35,7 +35,7 @@ cd docker
 docker-compose -f docker-compose up
 ```
 
-### 3.3.1. SEM O BUILD EM .JAR:
+### <span style="color: red;"> 3.3.1. SEM O BUILD EM .JAR: <span>
 ```bash
 cd TP_PrecoJusto
 ./mvnw clean package -DskipTests
