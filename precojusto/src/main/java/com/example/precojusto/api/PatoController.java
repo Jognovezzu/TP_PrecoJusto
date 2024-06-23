@@ -3,7 +3,8 @@ package com.example.precojusto.api;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.precojusto.api.model.CreatePatoRequest;
-import com.example.precojusto.repository.PatoDTO;
+import com.example.precojusto.repository.DTO.PatoDTO;
+import com.example.precojusto.repository.DTO.PatoVendidoProjection;
 import com.example.precojusto.service.PatoService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,12 @@ public class PatoController {
     @GetMapping
     public ResponseEntity<List<PatoDTO>> getAll(){
         List <PatoDTO> patos = patoService.getAll();
+        return ResponseEntity.ok(patos);
+    }
+
+    @GetMapping("/vendidos/")
+    public ResponseEntity<List<PatoVendidoProjection>> getVendidos(){
+        List <PatoVendidoProjection> patos = patoService.getVendidos();
         return ResponseEntity.ok(patos);
     }
     

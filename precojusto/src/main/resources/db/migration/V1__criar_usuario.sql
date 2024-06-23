@@ -1,37 +1,39 @@
 -- Script para criação das tabelas Pato, Cliente e Venda
 
+CREATE SCHEMA IF NOT EXISTS precojusto;
+
 -- Tabela Cliente
-CREATE TABLE CLIENTE (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS precojusto.CLIENTE (
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     desconto BOOLEAN NOT NULL
 );
 
 -- Tabela Pato
-CREATE TABLE PATO (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS precojusto.PATO (
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     mae VARCHAR(255),
     id_mae BIGINT,
+    valor INT DEFAULT 70,
     nfilhos INT DEFAULT 0,
     disponivel BOOLEAN,
-    CONSTRAINT fk_mae FOREIGN KEY (id_mae) REFERENCES pato(id)
+    CONSTRAINT fk_mae FOREIGN KEY (id_mae) REFERENCES precojusto.pato(id)
 );
 
--- Tabela Venda
-CREATE TABLE VENDA (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS precojusto.VENDA (
+    id SERIAL PRIMARY KEY,
     id_cliente BIGINT NOT NULL,
     data_venda DATE NOT NULL,
-    valor_total DOUBLE NOT NULL,
-    CONSTRAINT fk_venda_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id)
+    valor_total FLOAT NOT NULL,
+    CONSTRAINT fk_venda_cliente FOREIGN KEY (id_cliente) REFERENCES precojusto.cliente(id)
 );
 
--- Tabela de relacionamento entre Venda e Pato
-CREATE TABLE venda_patos (
+CREATE TABLE IF NOT EXISTS precojusto.VENDA_PATOS (
     id_venda BIGINT NOT NULL,
     id_pato BIGINT NOT NULL,
     PRIMARY KEY (id_venda, id_pato),
-    CONSTRAINT fk_venda_patos_venda FOREIGN KEY (id_venda) REFERENCES venda(id),
-    CONSTRAINT fk_venda_patos_pato FOREIGN KEY (id_pato) REFERENCES pato(id)
+    CONSTRAINT fk_venda_patos_venda FOREIGN KEY (id_venda) REFERENCES precojusto.venda(id),
+    CONSTRAINT fk_venda_patos_pato FOREIGN KEY (id_pato) REFERENCES precojusto.pato(id)
 );
+

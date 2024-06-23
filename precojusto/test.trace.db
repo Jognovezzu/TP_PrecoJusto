@@ -1,3 +1,0 @@
-2024-06-21 18:42:35.897468-04:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT p FROM Pato p LEFT JOIN [*]FETCH p.filhos"; expected "identifier"; SQL statement:
-SELECT p FROM Pato p LEFT JOIN FETCH p.filhos [42001-224]

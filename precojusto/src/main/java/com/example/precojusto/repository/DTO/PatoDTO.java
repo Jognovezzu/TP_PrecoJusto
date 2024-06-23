@@ -1,4 +1,4 @@
-package com.example.precojusto.repository;
+package com.example.precojusto.repository.DTO;
 
 import java.util.List;
 

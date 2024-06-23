@@ -1,6 +1,7 @@
 package com.example.precojusto.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.precojusto.repository.ClienteRepository;
 import com.example.precojusto.repository.PatoRepository;
 import com.example.precojusto.repository.VendaRepository;
+import com.example.precojusto.repository.DTO.NotaDTO;
+import com.example.precojusto.repository.DTO.ReportProjection;
 import com.example.precojusto.repository.model.Cliente;
 import com.example.precojusto.repository.model.Pato;
 import com.example.precojusto.repository.model.Venda;
@@ -24,7 +27,7 @@ public class VendaService {
     @Autowired
     private ClienteRepository clienteRepository;
     
-    public Venda DoVenda (Long id_cliente, List<Long> id_patos) {
+    public NotaDTO DoVenda (Long id_cliente, List<Long> id_patos) {
         Cliente cliente = clienteRepository.findById(id_cliente).orElseThrow();
         List<Pato> patos = patoRepository.findAllById(id_patos);
 
@@ -50,11 +53,42 @@ public class VendaService {
         venda.setDataVenda(LocalDate.now());
         venda.setValorTotal(total);
         
+        for (Pato pato : patos) {
+            pato.setDisponivel(false);
+        }
+        vendaRepository.save(venda);
 
-        return vendaRepository.save(venda);
+        NotaDTO nota = new NotaDTO();
+        nota.setId_venda(venda.getId());
+        nota.setId_cliente(cliente.getId());
+        nota.setData_venda(venda.getDataVenda());
+        nota.setValor_total(venda.getValorTotal());
+
+        return nota;
+    
     }
 
-    public List<Venda> getVendas() {
-        return vendaRepository.findAll();
+    public List<NotaDTO> getVendas() {
+        List<Venda> vendas = vendaRepository.findAll();
+        List<NotaDTO> notas = new ArrayList<>();
+        for (Venda venda : vendas) {
+            NotaDTO nota = new NotaDTO();
+            nota.setId_venda(venda.getId());
+            nota.setId_cliente(venda.getCliente().getId());
+            nota.setData_venda(venda.getDataVenda());
+            nota.setValor_total(venda.getValorTotal());
+            List<Long> id_patos = new ArrayList<>();
+            for (Pato pato : venda.getPatos()) {
+                id_patos.add(pato.getId());
+            }
+            nota.setId_patos(id_patos);
+            notas.add(nota);
+        }
+        return notas;
+        
+    }
+
+    public List<ReportProjection> makeReport() {
+        return vendaRepository.makeReport();
     }
 }
