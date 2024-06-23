@@ -27,9 +27,9 @@ public class Venda {
 
     @ManyToMany
     @JoinTable(
-        name = "venda_produto",
+        name = "venda_patos",
         joinColumns = @JoinColumn(name = "id_venda"),
-        inverseJoinColumns = @JoinColumn(name = "id_produto")
+        inverseJoinColumns = @JoinColumn(name = "id_pato")
     )
     private List<Pato> patos = new ArrayList<>();
 

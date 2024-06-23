@@ -35,6 +35,9 @@ public class Pato {
     @Column(name = "disponivel", nullable = false, columnDefinition = "boolean default true")
     private boolean disponivel;
 
+    @Column(name = "valor", nullable = false, columnDefinition = "double default 70.0")
+    private int valor;
+
     public Pato() {}
 
     public Long getId() {
@@ -55,6 +58,14 @@ public class Pato {
 
     public void setMae(Pato mae) {
         this.mae = mae;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
     public int getNfilhos() {
@@ -83,6 +94,11 @@ public class Pato {
 
     public void updateFilhos() {
         this.nfilhos++;
+        if (this.nfilhos == 1) {
+            this.valor = 50;
+        } else if (this.nfilhos == 2) {
+            this.valor = 25;            
+        }
     }
 
     public Pato(String nome, Pato mae) {
@@ -90,6 +106,7 @@ public class Pato {
         this.mae = mae;
         this.nfilhos = 0;
         this.disponivel = true;
+        this.valor = 70;
     }
 }
 
